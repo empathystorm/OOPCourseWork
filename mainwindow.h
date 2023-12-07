@@ -3,15 +3,9 @@
 
 #include <QMainWindow>
 
-#include <QSqlDatabase>
-#include <QSqlQuery>
-#include <QSqlTableModel>
 #include <QHeaderView>
 
 #include <QMessageBox>
-
-#include <QDebug>
-#include <QSqlError>
 
 #include "addemployee.h"
 #include "removeemployee.h"
@@ -41,9 +35,6 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    QSqlDatabase db;
-    QSqlQuery *query;
-    QSqlTableModel *model;
     addemployee *AddEmployee;
     RemoveEmployee *formRemove;
 
@@ -52,3 +43,5 @@ public slots:
     void slot_remove(QString);
 };
 #endif // MAINWINDOW_H
+
+

@@ -16,6 +16,7 @@ SOURCES += \
     removeemployee.cpp
 
 HEADERS += \
+    EmployeeBase.h \
     addemployee.h \
     mainwindow.h \
     removeemployee.h
