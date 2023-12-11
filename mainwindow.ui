@@ -117,8 +117,6 @@
     </property>
     <addaction name="actionCreate"/>
     <addaction name="actionOpen"/>
-    <addaction name="actionSave"/>
-    <addaction name="actionMerge"/>
     <addaction name="separator"/>
     <addaction name="action"/>
    </widget>
@@ -152,8 +150,6 @@
    </attribute>
    <addaction name="actionCreate"/>
    <addaction name="actionOpen"/>
-   <addaction name="actionSave"/>
-   <addaction name="actionMerge"/>
    <addaction name="separator"/>
    <addaction name="actionAdd"/>
    <addaction name="actionDelete"/>
@@ -161,7 +157,7 @@
   <action name="actionCreate">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/icons/add.png</normaloff>:/icons/icons/add.png</iconset>
+     <normaloff>:/icons/icons/new.png</normaloff>:/icons/icons/new.png</iconset>
    </property>
    <property name="text">
     <string>Создать</string>
@@ -180,30 +176,6 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+O</string>
-   </property>
-  </action>
-  <action name="actionSave">
-   <property name="icon">
-    <iconset resource="resources.qrc">
-     <normaloff>:/icons/icons/save_as.png</normaloff>:/icons/icons/save_as.png</iconset>
-   </property>
-   <property name="text">
-    <string>Сохранить как...</string>
-   </property>
-   <property name="shortcut">
-    <string>Ctrl+S</string>
-   </property>
-  </action>
-  <action name="actionMerge">
-   <property name="icon">
-    <iconset resource="resources.qrc">
-     <normaloff>:/icons/icons/merge.png</normaloff>:/icons/icons/merge.png</iconset>
-   </property>
-   <property name="text">
-    <string>Объединить...</string>
-   </property>
-   <property name="shortcut">
-    <string>Ctrl+M</string>
    </property>
   </action>
   <action name="actionInfo">

@@ -12,7 +12,9 @@
 
 class EmployeeBase {
 public:
-    EmployeeBase(QMainWindow* mainWindow, QString const& file_name) {
+    EmployeeBase() {}
+
+    void create(QMainWindow* mainWindow, QString const& file_name) {
         //созданте базы данных
         db = QSqlDatabase::addDatabase("QSQLITE");
         db.setDatabaseName(file_name);
@@ -41,12 +43,54 @@ public:
         model->setHeaderData(4, Qt::Horizontal, QObject::tr("Стаж"));
     }
 
-    EmployeeBase(QMainWindow* mainWindow) {
-        EmployeeBase(mainWindow, "DB");
+    void create(QMainWindow* mainWindow) {
+        create(mainWindow, "DB");
     }
 
-    QSqlTableModel*& get_model() {
+    QSqlTableModel* get_model() {
         return model;
+    }
+
+    void add_record(QString name, QString department, QString salary, QString experience) {
+        QString db_input = QString("INSERT INTO Employee (name,department,salary,experience) VALUES ('%1', '%2', %3, %4);").arg(name, department, salary, experience);
+        if (!query->exec(db_input)) {
+            qDebug() << "Unable to insert field: " << query->lastError();
+        }
+        query->clear();
+        model->select();
+    }
+
+    void remove_record(QString ID) {
+        QString db_input = QString("DELETE FROM Employee WHERE ID=%1;").arg(ID);
+        if (!query->exec(db_input)) {
+            qDebug() << "Unable to delete field: " << query->lastError();
+        }
+        query->clear();
+        model->select();
+    }
+
+    void filter_text(const QString &arg1) {
+        if (arg1 == "") {
+            model->setFilter("");
+            model->select();
+            return;
+        }
+        model->setFilter(QString("name LIKE '%%1%' OR department LIKE '%%2%'").arg(arg1, arg1));
+        model->select();
+    }
+
+    void filter_numbers(const QString &arg1, int index1, int index2) {
+        if (arg1 == "") {
+            model->setFilter("");
+            model->select();
+            return;
+        }
+        QStringList states = {"salary", "experience"};
+        QStringList operations = {"=", "<", ">"};
+        model->setFilter(QString("%1 %2 %3").arg(states[index1],
+                                                 operations[index2],
+                                                 arg1));
+        model->select();
     }
 
     ~EmployeeBase() {
